@@ -4,6 +4,7 @@ import (
 	"errors"
 	"literatorture/messages"
 	"strconv"
+	"strings"
 )
 
 const INVALID_CHARACTERS = "=+-_)(*&¨%$#@!\"'\\/?;:.>,<]}~^[{´}`)"
@@ -12,9 +13,17 @@ const INVALID_CHARACTERS = "=+-_)(*&¨%$#@!\"'\\/?;:.>,<]}~^[{´}`)"
 // A string is considered a valid word if it can't be converted to numeric types
 // or does not contains special characters. Returns True if these conditions are
 // satisfied, false otherwise
-func IsValidWord(word string) (bool, error) {
+func IsValidWord(word string) error {
 	_, intErr := strconv.Atoi(word)
 	if intErr == nil {
-		return false, errors.New(messages.InvalidType)
+		return errors.New(messages.InvalidType)
 	}
+	_, floatErr := strconv.ParseFloat(word, 64)
+	if floatErr == nil {
+		return errors.New(messages.InvalidType)
+	}
+	if strings.ContainsAny(word, INVALID_CHARACTERS) {
+		return errors.New(messages.InvalidType)
+	}
+	return nil
 }

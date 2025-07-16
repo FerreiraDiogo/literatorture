@@ -3,6 +3,7 @@ package input
 import (
 	"bufio"
 	"fmt"
+	"literatorture/validation"
 )
 
 // Reads user input. This functions expects an int to be typed.
@@ -22,6 +23,10 @@ func ReadStringInput(reader *bufio.Reader) (string, error) {
 	input, inputErr := reader.ReadString('\n')
 	if inputErr != nil {
 		return "", inputErr
+	}
+	validationErr := validation.IsValidWord(input)
+	if validationErr != nil {
+		return "", validationErr
 	}
 	return input, nil
 }

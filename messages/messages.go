@@ -2,7 +2,7 @@ package messages
 
 import "fmt"
 
-const InvalidType = "Inputed value is not a valid word"
+const InvalidType = "inputed value is not a valid word"
 
 func PrintWelcomeMessage() {
 	fmt.Println("========== Literatorture ==========")

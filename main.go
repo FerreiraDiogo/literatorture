@@ -2,14 +2,19 @@ package main
 
 import (
 	"bufio"
+	"literatorture/dictionary"
+	"literatorture/input"
 	"literatorture/messages"
 	"os"
+	"strings"
 )
 
 var reader bufio.Reader
+var dict dictionary.Dictionary
 
 func init() {
 	reader = *bufio.NewReader(os.Stdin)
+	dict = dictionary.Dictionary{}
 }
 
 func main() {
@@ -19,7 +24,7 @@ func main() {
 
 	for running {
 		messages.PrintMenu()
-		input, inputErr := readInt()
+		input, inputErr := input.ReadInt()
 		if inputErr != nil {
 			messages.PrintError(inputErr)
 			continue
@@ -48,5 +53,16 @@ func selectOption(input int) bool {
 
 // Inserts a word and its meaning in the dictionary
 func insertWord() {
-	word, wordErr := readStringInput()
+	word, wordErr := input.ReadStringInput(&reader)
+	definition, defErr := input.ReadStringInput(&reader)
+
+	if wordErr != nil {
+		messages.PrintError(wordErr)
+	} else if defErr != nil {
+		messages.PrintError(defErr)
+	} else {
+		key := strings.ToLower(word)
+		entry := dictionary.NewEntry(word, definition)
+		dict.AddWord(key, *entry)
+	}
 }

@@ -1,5 +1,9 @@
 package dictionary
 
 type Dictionary struct {
-	Word map[string]Entry
+	Words map[string]Entry
+}
+
+func (d *Dictionary) AddWord(key string, entry Entry) {
+	d.Words[key] = entry
 }

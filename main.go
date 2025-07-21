@@ -52,8 +52,11 @@ func selectOption(input int) bool {
 }
 
 // Inserts a word and its meaning in the dictionary
+// if a key for the given word is provided, then updates it
 func insertWord() {
+	messages.PrintInputWordMessage()
 	word, wordErr := input.ReadStringInput(&reader)
+	messages.PrintInputDefinitionMessage()
 	definition, defErr := input.ReadStringInput(&reader)
 
 	if wordErr != nil {

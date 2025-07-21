@@ -45,9 +45,29 @@ func selectOption(input int) bool {
 	case 1:
 		insertWord()
 		return true
+	case 2:
+		removeWord()
+		return true
 	default:
 		messages.PrintInvalidOptionMessage()
 		return true
+	}
+}
+
+// Removes a given word.
+func removeWord() {
+	messages.PrintRemoveWordMessage()
+	word, wordErr := input.ReadStringInput(&reader)
+	if wordErr != nil {
+		messages.PrintError(wordErr)
+	} else {
+		_, ok := dict.Words[word]
+		if !ok {
+			messages.PrintWordDoesntExist()
+		} else {
+			delete(dict.Words, word)
+			messages.PrintRemovedMessage()
+		}
 	}
 }
 

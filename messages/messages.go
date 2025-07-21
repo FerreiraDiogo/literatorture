@@ -25,6 +25,22 @@ func PrintInputDefinitionMessage() {
 	fmt.Print("\nNow type in it's definition: ")
 }
 
+func PrintRemoveWordMessage() {
+	fmt.Println("Type in the word you want to remove:")
+}
+
+func PrintWishToInsertMessage() {
+	fmt.Println("Do you wish to insert it?")
+}
+
+func PrintWordDoesntExist() {
+	fmt.Println("Inputed word doesn't exists.")
+}
+
+func PrintRemovedMessage() {
+	fmt.Println("Word succesfully removed")
+}
+
 func PrintError(e error) {
 	fmt.Println(e)
 }

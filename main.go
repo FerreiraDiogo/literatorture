@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"literatorture/dictionary"
 	"literatorture/input"
 	"literatorture/messages"
@@ -66,5 +65,4 @@ func insertWord() {
 		entry := dictionary.NewEntry(word, definition)
 		dict.AddWord(key, *entry)
 	}
-	fmt.Println(dict)
 }

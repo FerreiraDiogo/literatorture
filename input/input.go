@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"literatorture/validation"
+	"strings"
 )
 
 // Reads user input. This functions expects an int to be typed.
@@ -24,6 +25,7 @@ func ReadStringInput(reader *bufio.Reader) (string, error) {
 	if inputErr != nil {
 		return "", inputErr
 	}
+	input = strings.TrimSpace(input)
 	validationErr := validation.IsValidWord(input)
 	if validationErr != nil {
 		return "", validationErr

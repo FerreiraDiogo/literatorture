@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"literatorture/dictionary"
 	"literatorture/input"
 	"literatorture/messages"
@@ -14,7 +15,7 @@ var dict dictionary.Dictionary
 
 func init() {
 	reader = *bufio.NewReader(os.Stdin)
-	dict = dictionary.Dictionary{}
+	dict = *dict.NewDictionary()
 }
 
 func main() {
@@ -65,4 +66,5 @@ func insertWord() {
 		entry := dictionary.NewEntry(word, definition)
 		dict.AddWord(key, *entry)
 	}
+	fmt.Println(dict)
 }

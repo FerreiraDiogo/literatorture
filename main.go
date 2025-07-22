@@ -48,9 +48,27 @@ func selectOption(input int) bool {
 	case 2:
 		removeWord()
 		return true
+	case 3:
+		findWordMeaning()
+		return true
 	default:
 		messages.PrintInvalidOptionMessage()
 		return true
+	}
+}
+
+// finds a word meaning.
+func findWordMeaning() {
+	word, wordErr := input.ReadStringInput(&reader)
+	if wordErr != nil {
+		messages.PrintError(wordErr)
+	} else {
+		entry, ok := dict.Words[word]
+		if ok {
+			messages.PrintEntry(entry)
+		} else {
+			messages.PrintWordDoesntExist()
+		}
 	}
 }
 

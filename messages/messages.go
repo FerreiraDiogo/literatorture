@@ -1,6 +1,9 @@
 package messages
 
-import "fmt"
+import (
+	"fmt"
+	"literatorture/dictionary"
+)
 
 const InvalidType = "inputed value is not a valid word"
 
@@ -39,6 +42,10 @@ func PrintWordDoesntExist() {
 
 func PrintRemovedMessage() {
 	fmt.Println("Word succesfully removed")
+}
+
+func PrintEntry(entry dictionary.Entry) {
+	fmt.Printf("%s's definition is %s", entry.Word, entry.Meaning)
 }
 
 func PrintError(e error) {

@@ -55,3 +55,14 @@ func PrintError(e error) {
 func PrintInvalidOptionMessage() {
 	fmt.Println("Invalid Option")
 }
+
+func PrintSugestions(sugestions []string) {
+	fmt.Println("The typed word did not foun an exact match. The sugested words are the following:")
+	for _, s := range sugestions {
+		fmt.Printf("- %s\n", s)
+	}
+}
+
+func PrintFindWord() {
+	fmt.Println("Type the word you want to search. If there's no direct match you will be offered similar words to search for.")
+}

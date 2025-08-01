@@ -59,6 +59,7 @@ func selectOption(input int) bool {
 
 // finds a word meaning.
 func findWordMeaning() {
+	messages.PrintFindWord()
 	word, wordErr := input.ReadStringInput(&reader)
 	if wordErr != nil {
 		messages.PrintError(wordErr)
@@ -67,7 +68,12 @@ func findWordMeaning() {
 		if ok {
 			messages.PrintEntry(entry)
 		} else {
-			messages.PrintWordDoesntExist()
+			sugestions, sugestionsOk := dict.SearchOnAuxiliaryIndexes(word)
+			if sugestionsOk {
+				messages.PrintSugestions(sugestions)
+			} else {
+				messages.PrintWordDoesntExist()
+			}
 		}
 	}
 }

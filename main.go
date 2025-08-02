@@ -51,10 +51,17 @@ func selectOption(input int) bool {
 	case 3:
 		findWordMeaning()
 		return true
+	case 5:
+		showStats()
+		return true
 	default:
 		messages.PrintInvalidOptionMessage()
 		return true
 	}
+}
+
+func showStats() {
+	messages.PrintStats(dict.GetStats())
 }
 
 // finds a word meaning.
@@ -90,6 +97,7 @@ func removeWord() {
 			messages.PrintWordDoesntExist()
 		} else {
 			delete(dict.Words, word)
+			dict.DecreaseCharacterCount(string(word[0]))
 			messages.PrintRemovedMessage()
 		}
 	}

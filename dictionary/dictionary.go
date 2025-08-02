@@ -1,22 +1,25 @@
 package dictionary
 
 import (
+	"slices"
 	"strings"
 )
 
 type Dictionary struct {
 	Words             map[string]Entry
 	Prefixes, Sufixes map[string][]string
+	stats             map[string]int
 }
 
 func (d *Dictionary) AddWord(key string, entry Entry) {
 	d.Words[key] = entry
 	d.addPrefix(key)
 	d.addSufix(key)
+	d.increaseCharacterCount(string(key[0]))
 }
 
 func (d Dictionary) NewDictionary() *Dictionary {
-	return &Dictionary{Words: make(map[string]Entry, 0), Prefixes: make(map[string][]string), Sufixes: make(map[string][]string)}
+	return &Dictionary{Words: make(map[string]Entry, 0), Prefixes: make(map[string][]string), Sufixes: make(map[string][]string), stats: make(map[string]int)}
 }
 
 func (d *Dictionary) addPrefix(word string) {
@@ -60,4 +63,27 @@ func (d *Dictionary) SearchOnAuxiliaryIndexes(word string) ([]string, bool) {
 		}
 	}
 	return make([]string, 0), false
+}
+
+func (d *Dictionary) increaseCharacterCount(char string) {
+	d.stats[char]++
+}
+
+func (d *Dictionary) DecreaseCharacterCount(char string) {
+	d.stats[char]--
+}
+
+func (d *Dictionary) GetStats() map[string]int {
+	keys := make([]string, 0)
+	orderedMap := make(map[string]int, 0)
+
+	for k := range d.stats {
+		keys = append(keys, string(k))
+	}
+
+	slices.Sort(keys)
+	for _, v := range keys {
+		orderedMap[v] = d.stats[v]
+	}
+	return orderedMap
 }

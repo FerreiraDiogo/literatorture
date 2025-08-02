@@ -17,7 +17,7 @@ func PrintGoodbyeMessage() {
 
 func PrintMenu() {
 	fmt.Println("==========    Options    ==========")
-	fmt.Print("1 - Insert/Update Word\n2 - Remove Word\n3 - View Word's Meaning\n4 - Export File\n")
+	fmt.Print("1 - Insert/Update Word\n2 - Remove Word\n3 - View Word's Meaning\n4 - Export File\n5 - Show Stats")
 }
 
 func PrintInputWordMessage() {
@@ -65,4 +65,15 @@ func PrintSugestions(sugestions []string) {
 
 func PrintFindWord() {
 	fmt.Println("Type the word you want to search. If there's no direct match you will be offered similar words to search for.")
+}
+
+func PrintStats(stats map[string]int) {
+	fmt.Println("Here is the distribution of words by initial character:")
+	fmt.Println("|------------------------|")
+	fmt.Printf("|  Character |  Amount   |\n")
+	fmt.Println("|------------------------|")
+	for i, v := range stats {
+		fmt.Printf("|       %s    |     %d     |\n", i, v)
+		fmt.Println("|------------------------|")
+	}
 }

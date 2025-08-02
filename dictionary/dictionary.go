@@ -21,12 +21,13 @@ func (d Dictionary) NewDictionary() *Dictionary {
 
 func (d *Dictionary) addPrefix(word string) {
 	word = strings.TrimSpace(word)
+
 	key := ""
-	for _, v := range word {
-		key += string(v)
-		if key != word {
-			d.Prefixes[key] = append(d.Prefixes[key], word)
-		}
+	for i := 0; i < len(word); i++ {
+
+		key += string(word[i])
+		d.Prefixes[key] = append(d.Prefixes[key], word)
+
 	}
 
 }
@@ -34,11 +35,9 @@ func (d *Dictionary) addSufix(word string) {
 	word = strings.TrimSpace(word)
 	invertedWord := reverse(word)
 	key := ""
-	for _, v := range invertedWord {
-		key = string(v) + key
-		if key != word {
-			d.Sufixes[key] = append(d.Sufixes[key], word)
-		}
+	for i := 0; i < len(invertedWord); i++ {
+		key = string(invertedWord[i]) + key
+		d.Sufixes[key] = append(d.Sufixes[key], word)
 	}
 }
 

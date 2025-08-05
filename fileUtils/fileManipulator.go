@@ -13,6 +13,7 @@ func init() {
 	logger = slog.New(slog.NewJSONHandler(os.Stdout, nil))
 }
 
+// opens a file with the given path
 func open(fileName string) (*os.File, error) {
 	logger.Info("Opening file: ", "fileName", fileName)
 	file, err := os.OpenFile(fileName, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
@@ -22,6 +23,7 @@ func open(fileName string) (*os.File, error) {
 	return file, nil
 }
 
+// Wrapper function for wirting the dict into the selected file type
 func Write(fileType FileType, dict dictionary.Dictionary) error {
 	file, fileError := open(fileType.String())
 	if fileError != nil {

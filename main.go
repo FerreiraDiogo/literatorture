@@ -65,6 +65,7 @@ func selectOption(input int) bool {
 	}
 }
 
+// Reads user input and writes the content of the dict into specified file
 func saveToFile() {
 	if len(dict.Words) == 0 {
 		fmt.Println("No words were added to your dictionary yet")
@@ -82,6 +83,7 @@ func saveToFile() {
 	}
 }
 
+// Shows the stats of the dict
 func showStats() {
 	messages.PrintStats(dict.GetStats())
 }

@@ -26,14 +26,17 @@ var writeToFile = map[FileType]func(*os.File, dictionary.Dictionary) error{
 	CSV:  writeToCsv,
 }
 
+// Returns the filename associated with a FileType
 func (f FileType) String() string {
 	return filename[f]
 }
 
+// Returns the functions responsible for writing the dict to a specific file type
 func (f FileType) writeToFile() func(*os.File, dictionary.Dictionary) error {
 	return writeToFile[f]
 }
 
+// Writes the dict into a json file
 func writeToJson(file *os.File, dict dictionary.Dictionary) error {
 	log.Printf("Writing JSON file\n")
 	jsonified, marshErr := json.MarshalIndent(dict.Words, "", " ")
@@ -45,6 +48,8 @@ func writeToJson(file *os.File, dict dictionary.Dictionary) error {
 	log.Println("JSON file successfully writen")
 	return nil
 }
+
+// Writes the dict into a csv(comma delimited) file
 func writeToCsv(file *os.File, dict dictionary.Dictionary) error {
 	writer := csv.NewWriter(file)
 	defer writer.Flush()

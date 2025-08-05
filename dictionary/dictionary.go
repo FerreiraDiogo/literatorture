@@ -11,6 +11,7 @@ type Dictionary struct {
 	stats             map[string]int
 }
 
+// Adds a word into the dictionary
 func (d *Dictionary) AddWord(key string, entry Entry) {
 	d.Words[key] = entry
 	d.addPrefix(key)
@@ -18,10 +19,12 @@ func (d *Dictionary) AddWord(key string, entry Entry) {
 	d.increaseCharacterCount(string(key[0]))
 }
 
+// Constructor method
 func (d Dictionary) NewDictionary() *Dictionary {
 	return &Dictionary{Words: make(map[string]Entry, 0), Prefixes: make(map[string][]string), Sufixes: make(map[string][]string), stats: make(map[string]int)}
 }
 
+// Adds prefixes for a given word in the Prefix inverted index
 func (d *Dictionary) addPrefix(word string) {
 	word = strings.TrimSpace(word)
 
@@ -34,6 +37,8 @@ func (d *Dictionary) addPrefix(word string) {
 	}
 
 }
+
+// Adds sufixes for a given word in the Sufix inverted index
 func (d *Dictionary) addSufix(word string) {
 	word = strings.TrimSpace(word)
 	invertedWord := reverse(word)
@@ -44,6 +49,7 @@ func (d *Dictionary) addSufix(word string) {
 	}
 }
 
+// Reverses a string
 func reverse(word string) string {
 	result := ""
 	for _, v := range word {
@@ -52,6 +58,7 @@ func reverse(word string) string {
 	return result
 }
 
+// Searchs a word by prefixes or sufixes
 func (d *Dictionary) SearchOnAuxiliaryIndexes(word string) ([]string, bool) {
 	suggestedWords, prefixOk := d.Prefixes[word]
 	if prefixOk {
@@ -65,14 +72,17 @@ func (d *Dictionary) SearchOnAuxiliaryIndexes(word string) ([]string, bool) {
 	return make([]string, 0), false
 }
 
+// Increase the char count for the given char in the stats map
 func (d *Dictionary) increaseCharacterCount(char string) {
 	d.stats[char]++
 }
 
+// Decrease the char count for the given char in the stats map
 func (d *Dictionary) DecreaseCharacterCount(char string) {
 	d.stats[char]--
 }
 
+// Gets basic statistics for thw words in the dict
 func (d *Dictionary) GetStats() map[string]int {
 	keys := make([]string, 0)
 	orderedMap := make(map[string]int, 0)

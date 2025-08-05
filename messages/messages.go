@@ -17,7 +17,7 @@ func PrintGoodbyeMessage() {
 
 func PrintMenu() {
 	fmt.Println("==========    Options    ==========")
-	fmt.Print("1 - Insert/Update Word\n2 - Remove Word\n3 - View Word's Meaning\n4 - Export File\n5 - Show Stats")
+	fmt.Print("1 - Insert/Update Word\n2 - Remove Word\n3 - View Word's Meaning\n4 - Export File\n5 - Show Stats\n")
 }
 
 func PrintInputWordMessage() {

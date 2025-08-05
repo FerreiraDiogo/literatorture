@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"literatorture/dictionary"
+	"literatorture/fileUtils"
 	"literatorture/input"
 	"literatorture/messages"
 	"os"
@@ -51,12 +53,32 @@ func selectOption(input int) bool {
 	case 3:
 		findWordMeaning()
 		return true
+	case 4:
+		saveToFile()
+		return true
 	case 5:
 		showStats()
 		return true
 	default:
 		messages.PrintInvalidOptionMessage()
 		return true
+	}
+}
+
+func saveToFile() {
+	if len(dict.Words) == 0 {
+		fmt.Println("No words were added to your dictionary yet")
+		return
+	}
+	fmt.Println("Insert 0 for JSON or 1 for CSV")
+	input, wordErr := input.ReadInt()
+	if wordErr != nil {
+		messages.PrintError(wordErr)
+		return
+	}
+	writeErr := fileUtils.Write(fileUtils.FileType(input), dict)
+	if writeErr != nil {
+		messages.PrintError(writeErr)
 	}
 }
 
